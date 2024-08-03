@@ -14,3 +14,11 @@ docker run -d --name nats-server -p 4222:4222 -p 8222:8222 nats
 6. Levantar el proyecto con `pnpm start:dev`
 
 ## Nats
+```
+docker run -d --name nats-server -p 4222:4222 -p 8222:8222 nats
+```
+
+### PROD
+```
+docker build -f Dockerfile.prod -t client-gateway .
+```
