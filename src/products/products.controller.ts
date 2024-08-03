@@ -9,12 +9,14 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { catchError } from 'rxjs';
 import { PaginationDto } from 'src/common';
 import { NATS_SERVICE } from 'src/config';
 import { CreateProductDto, UpdateProductDto } from './dto';
+import { AuthGuard } from 'src/auth/guards/auth.guard';
 
 @Controller('products')
 export class ProductsController {
@@ -26,6 +28,7 @@ export class ProductsController {
   }
 
   @Get()
+  @UseGuards(AuthGuard)
   findAllProducts(@Query() paginationDto: PaginationDto) {
     return this.client.send({ cmd: 'find_all_products' }, paginationDto);
   }
